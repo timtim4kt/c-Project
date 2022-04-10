@@ -70,9 +70,7 @@ bool Image::savePPM(string filename)
         fprintf(stderr, "%s\n", err);
         ofs.close();
     }
-
     return true;
-
 }
 
 
@@ -110,12 +108,52 @@ void Image::greyScale()
 }
 void Image::flipHorizontal()
 {
+    int pixels[3];
+    unsigned int temp;
+    unsigned int temp1;
+    for(int j= 0; j < h; ++j)
+    {
+        for(int i =0; i <w/2; ++i)
+        {
+            temp = i + j * w;
+            temp1 = (w - 1 - i) + j * w;
 
+            pixels[0] = this->pixels[temp].r;
+            pixels[1] = this->pixels[temp].g;
+            pixels[2] = this->pixels[temp].b;
 
+            this->pixels[temp] = this->pixels[temp1];
+
+            this->pixels[temp1].r = pixels[0];
+            this->pixels[temp1].g = pixels[1];
+            this->pixels[temp1].b = pixels[2];
+        }
+    }
 }
 void Image::flipVertically()
 {
 
+    int pixels[3];
+    unsigned int temp,temp1;
+
+    for(int i= 0; i < w; ++i)
+    {
+        for(int j =0; j <h/2; ++j)
+        {
+            temp = i + j * w;
+            temp1 = i + (h - 1 - j) * w;
+
+            pixels[0] = this->pixels[temp].r;
+            pixels[1] = this->pixels[temp].g;
+            pixels[2] = this->pixels[temp].b;
+
+            this->pixels[temp] = this->pixels[temp1];
+
+            this->pixels[temp1].r = pixels[0];
+            this->pixels[temp1].g = pixels[1];
+            this->pixels[temp1].b = pixels[2];
+        }
+    }
 
 }
 void Image::AdditionalFunction2()
