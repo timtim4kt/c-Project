@@ -166,6 +166,16 @@ void Image::AdditionalFunction3()
 }
 void Image::AdditionalFunction1()
 {
+    //half blue half red
+        for(int j = 0; j < w * (h/2); ++j) {
+            this->pixels[j].r = 0;
+            this->pixels[j].g = 0;
+        }
+
+    for(int j = w * (h/2); j < w *h; ++j){
+        this->pixels[j].g = 0;
+        this->pixels[j].b = 0;
+    }
 
 }
 
