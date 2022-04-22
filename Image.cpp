@@ -158,24 +158,45 @@ void Image::flipVertically()
 }
 void Image::AdditionalFunction2()
 {
-
+        //invert colors
+        for (int i = 0; i < w * h; ++i) {
+            pixels[i].r = 255 - pixels[i].r;
+            pixels[i].g = 255 - pixels[i].g;
+            pixels[i].b = 255 - pixels[i].b;
+        }
 }
 void Image::AdditionalFunction3()
 {
-
+    int pixels[3];
+    unsigned int x;
+    for(int i = 0; i < (h*w / 2); ++i)
+    {
+        x = h*w - i;
+        pixels[0] = this->pixels[i].r;
+        pixels[1] = this->pixels[i].g;
+        pixels[2] = this->pixels[i].b;
+        this->pixels[i] = this->pixels[x];
+        this->pixels[x].r = pixels[0];
+        this->pixels[x].g = pixels[1];
+        this->pixels[x].b = pixels[2];
+    }
 }
 void Image::AdditionalFunction1()
 {
-    //half blue half red
+
+        //half blue half red
         for(int j = 0; j < w * (h/2); ++j) {
             this->pixels[j].r = 0;
             this->pixels[j].g = 0;
         }
 
-    for(int j = w * (h/2); j < w *h; ++j){
-        this->pixels[j].g = 0;
-        this->pixels[j].b = 0;
-    }
+        for(int j = w * (h/2); j < w *h; ++j){
+            this->pixels[j].g = 0;
+            this->pixels[j].b = 0;
+        }
+
+
+
 
 }
 
