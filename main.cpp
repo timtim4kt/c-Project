@@ -21,6 +21,8 @@ using namespace std;
 #define IDM_EDIT_AD2 12
 #define IDM_EDIT_AD3 13
 #define IDM_FILE_LOAD_RAW 14
+#define IDM_EDIT_AD4 15
+#define IDM_EDIT_AF 16
 string current_file;
 string fileType;
 // The main window class name.
@@ -53,12 +55,15 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     AppendMenuW(Alter, MF_STRING, IDM_EDIT_AD1, L"&Additional Function 1"); // Copy this line to add
     AppendMenuW(Alter, MF_STRING, IDM_EDIT_AD2, L"&Additional Function 2"); // Copy this line to add
     AppendMenuW(Alter, MF_STRING, IDM_EDIT_AD3, L"&Additional Function 3"); // Copy this line to add
-     // Copy this line to add
+    AppendMenuW(Alter, MF_STRING, IDM_EDIT_AD4, L"&Gamma");
+    AppendMenuW(Alter, MF_STRING, IDM_EDIT_AF, L"&Advanced Feature");
+    // Copy this line to add
 
 
 
     AppendMenuW(hMenubar, MF_POPUP, (UINT_PTR)hMenu, L"&File");
     AppendMenuW(hMenubar, MF_POPUP, (UINT_PTR)Alter, L"&Edit");
+
 
     int ret = createWindow(hInstance, nCmdShow, hMenubar);
 
@@ -130,6 +135,14 @@ void processMenu(HWND hWnd, WPARAM wParam)
         case IDM_EDIT_AD3:
 
             image->AdditionalFunction3();
+            break;
+        case IDM_EDIT_AD4:
+
+            image->gamma();
+            break;
+        case IDM_EDIT_AF:
+
+            image->AdvancedFeature();
             break;
         case IDM_EDIT_Reset:
             if(fileType=="ppm")

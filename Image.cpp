@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <cstring>
 #include "Image.h"
+#include <valarray>
 
 
 
@@ -167,6 +168,7 @@ void Image::AdditionalFunction2()
 }
 void Image::AdditionalFunction3()
 {
+    //reverse
     int pixels[3];
     unsigned int x;
     for(int i = 0; i < (h*w / 2); ++i)
@@ -194,10 +196,36 @@ void Image::AdditionalFunction1()
             this->pixels[j].g = 0;
             this->pixels[j].b = 0;
         }
+}
 
+void Image::gamma()
+{
+    for (int i = 0; i < w * h; i++)
+    {
+        pixels[i].r = pow(pixels[i].r / 255.0f, 0.28f) * 255;
+        pixels[i].g = pow(pixels[i].g / 255.0f, 0.28f) * 255;
+        pixels[i].b = pow(pixels[i].b / 255.0f, 0.28f) * 255;
+    }
+}
 
-
-
+void Image::AdvancedFeature()
+{
+    // mirror
+    int pixels[3];
+    unsigned int img;
+    unsigned int img1;
+    for(int i= 0; i < w; ++i)
+    {
+        for(int j =0; j <h/2; ++j)
+        {
+            img = i + j * w;
+            img1 = i + (h - 1 - j) * w;
+            pixels[0] = this->pixels[img].r;
+            pixels[1] = this->pixels[img].g;
+            pixels[2] = this->pixels[img].b;
+            this->pixels[img] = this->pixels[img1];
+        }
+    }
 }
 
 /* Functions used by the GUI - DO NOT MODIFY */
